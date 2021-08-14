@@ -25,9 +25,8 @@ $user_name = 'Vladimir'; // укажите здесь ваше имя
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
-
+<?php
         <nav class="user-menu">
-	<?php
         if ($is_auth == 1){
 		<div class="user-menu__logged">
   			<p>$user_name</p>
@@ -42,10 +41,10 @@ $user_name = 'Vladimir'; // укажите здесь ваше имя
   			<li class="user-menu__item">
     				<a href="#">Вход</a>
   			</li>
-		</ul>
+		</ul>;
 	}
-	?>
         </nav>
+?>
     </div>
 </header>
 
