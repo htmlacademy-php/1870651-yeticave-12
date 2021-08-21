@@ -3,45 +3,49 @@ $is_auth = rand(0, 1);
 
 $user_name = 'Vladimir Kreyson'; // укажите здесь ваше имя
 $categories = [
-    'Доски и лыжи', 'Крепления', 'Ботинки',
-    'Одежда', 'Инструменты', 'Разное'
+    'Доски и лыжи',
+    'Крепления',
+    'Ботинки',
+    'Одежда',
+    'Инструменты',
+    'Разное',
 ];
 $announcements = [
     [
     'Name' => '2014 Rossignol District Snowboard',
     'Category' => 'Доски и лыжи',
     'Price' => 10999,
-    'URL picture' => 'img/lot-1.jpg'
+    'url_picture' => 'img/lot-1.jpg',
     ],
     [
     'Name' => 'DC Ply Mens 2016/2017 Snowboard',
     'Category' => 'Доски и лыжи',
     'Price' => 159999,
-    'URL picture' => 'img/lot-2.jpg'
+    'url_picture' => 'img/lot-2.jpg',
     ],
     [
     'Name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
     'Category' => 'Крепления',
     'Price' => 8000,
-    'URL picture' => 'img/lot-3.jpg'
+    'url_picture' => 'img/lot-3.jpg',
     ],
     [
     'Name' => 'Ботинки для сноуборда DC Mutiny Charocal',
     'Category' => 'Ботинки',
     'Price' => 10999,
-    'URL picture' => 'img/lot-4.jpg'
+    'url_picture' => 'img/lot-4.jpg',
     ],
     [
     'Name' => 'Куртка для сноуборда DC Mutiny Charocal',
     'Category' => 'Одежда',
     'Price' => 7500,
-    'URL picture' => 'img/lot-5.jpg'
+    'url_picture' => 'img/lot-5.jpg',
     ],
     [
     'Name' => 'Маска Oakley Canopy',
     'Category' => 'Маска',
     'Price' => 5400,
-    'URL picture' => 'img/lot-6.jpg'
+    'url_picture' => 'img/lot-6.jpg',
     ],
 ];
 ?>
@@ -109,10 +113,10 @@ $announcements = [
         </div>
         <ul class="lots__list">
             <!--заполните этот список из массива с товарами-->
-            <?php foreach ($announcements as $key => $val): ?>
+            <?php foreach ($announcements as $val): ?>
                 <li class="lots__item lot">
                     <div class="lot__image">
-                        <img src="<?=$val['URL picture']; ?>" width="350" height="260" alt="">
+                        <img src="<?=$val['url_picture']; ?>" width="350" height="260" alt="">
                     </div>
                     <div class="lot__info">
                         <span class="lot__category"><?=$val['Category']; ?></span>
