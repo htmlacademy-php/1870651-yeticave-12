@@ -5,12 +5,12 @@ function format_price($user_price) {
     $rounded_price = ceil($user_price);
     if ($rounded_price < 1000) {
         $result_price = $rounded_price." "."₽";
-        return $result_price;
+        print($result_price);
     }
     else {
-        $format_price = number_format($rounded_price,0,' ');
+        $format_price = number_format($rounded_price,0, ",", " " );
         $result_price = $format_price." "."₽";
-        return $result_price;
+        print($result_price);
     }
 }
 
@@ -137,7 +137,7 @@ $announcements = [
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost">format_price(<?=$val['price']; ?>);</span>
+                                <span class="lot__cost"><?php format_price($val['price']); ?> </span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
