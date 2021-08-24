@@ -1,6 +1,12 @@
 <?php
 $is_auth = rand(0, 1);
 
+function format_price($user_price) {
+    $rounded_price = ceil($user_price);
+    $format_price = number_format($rounded_price, 0, ',', ' ');
+    return $format_price.' ₽';
+}
+
 $user_name = 'Vladimir Kreyson'; // укажите здесь ваше имя
 $categories = [
     'Доски и лыжи',
@@ -124,7 +130,7 @@ $announcements = [
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost"><?=$val['price']; ?><b class="rub">р</b></span>
+                                <span class="lot__cost"><?php print(format_price($val['price'])); ?> </span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
