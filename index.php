@@ -50,16 +50,15 @@ $lots = [
     ],
 ];
 
-$layout_content = include_template('layout.php', [
+include_template('main.php', [
+    'categories' => $categories,
+    'lots' => $lots,
+]);
+
+echo include_template('layout.php', [
     'user_name' => $user_name,
     'content' => '',
     'title' => $title,
     'categories' => $categories,
 ]);
 
-$main_content = include_template('main.php', [
-    'categories' => $categories,
-    'lots' => $lots,
-]);
-
-print($layout_content);
