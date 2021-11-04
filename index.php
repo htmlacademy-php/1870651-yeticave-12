@@ -52,15 +52,15 @@ $lots = [
     ],
 ];
 
-function include_main('main.php', array $data_main[
+include_template("main.php", $categories[
     'categories' => $categories,
     'lots' => $lots,
-]);
+])
 
-function include_layout('layout.php', array $data_layout[
+include_template('layout.php', $lots[
     'user_name' => $user_name,
     'content' => '',
     'title' => $title,
     'categories' => $categories,
-]);
+])
 
