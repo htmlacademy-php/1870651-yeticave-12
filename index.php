@@ -1,8 +1,9 @@
 <?php
 require_once "helpers.php";
-$is_auth = rand(0, 1);
+$isAuth = rand(0, 1);
 
-$user_name = 'Vladimir Kreyson'; // укажите здесь ваше имя
+$title = 'YetiCave';
+$userName = 'Vladimir Kreyson'; // укажите здесь ваше имя
 $categories = [
     'Доски и лыжи',
     'Крепления',
@@ -56,10 +57,10 @@ $content=include_template("main.php", [
 ]);
 
 echo include_template('layout.php', [
-    'is_auth' => $is_auth,
-    'user_name' => $user_name,
+    'is_auth' => $isAuth,
+    'user_name' => $userName,
     'content' => $content,
-    'title' => 'Магазин',
+    'title' => $title,
     'categories' => $categories,
 ]);
 
