@@ -57,8 +57,8 @@ $content=include_template("main.php", [
 ]);
 
 echo include_template('layout.php', [
-    'is_auth' => $isAuth,
-    'user_name' => $userName,
+    'isAuth' => $isAuth,
+    'userName' => $userName,
     'content' => $content,
     'title' => $title,
     'categories' => $categories,
