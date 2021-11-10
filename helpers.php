@@ -134,13 +134,23 @@ function include_template($name, array $data = []) {
         return $result;
     }
 
-    ob_start();
+    ob_start(); #Буферизация
     extract($data);
     require $name;
 
     $result = ob_get_clean();
 
     return $result;
+}
+
+/**
+ * @param $user_price Принимает ставку
+ * @return string Возвращает отформатированную согласно задания цену
+ */
+function format_price($user_price) {
+    $rounded_price = ceil($user_price);
+    $format_price = number_format($rounded_price, 0, ',', ' ');
+    return $format_price.' ₽';
 }
 
 
