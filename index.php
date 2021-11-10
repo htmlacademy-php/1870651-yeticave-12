@@ -1,7 +1,5 @@
 <?php
 require_once "helpers.php";
-require_once "templates/layout.php";
-require_once "templates/main.php";
 $is_auth = rand(0, 1);
 
 $user_name = 'Vladimir Kreyson'; // укажите здесь ваше имя
@@ -52,15 +50,16 @@ $lots = [
     ],
 ];
 
-include_template("main.php", $categories[
+$content=include_template("main.php", [
     'categories' => $categories,
     'lots' => $lots,
-])
+]);
 
-include_template('layout.php', $lots[
+echo include_template('layout.php', [
+    'is_auth' => $is_auth,
     'user_name' => $user_name,
-    'content' => '',
-    'title' => $title,
+    'content' => $content,
+    'title' => 'Магазин',
     'categories' => $categories,
-])
+]);
 
