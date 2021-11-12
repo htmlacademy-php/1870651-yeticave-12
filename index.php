@@ -5,11 +5,17 @@ $title = 'YetiCave';
 $userName = 'Vladimir Kreyson';
 
 //Передаём в функцию текущую дату и дату конца продажи. Возвращает оставшееся время.
-function EndOfTime(string $dateEnd){
-    $today = date('Y-m-d H:i:s');
+function EndOfTime(string $dateEnd)
+{
+    $today = time();
     $endTime = strtotime($dateEnd);
-    $howManyTimeToEnd = $endTime - $today;
-    return $howManyTimeToEnd;
+    $howManyTimeToEndStamp = ($endTime - $today);
+    $howManyTimeToEnd = array();
+    $howManyTimeToEnd['hours'] = floor($howManyTimeToEndStamp / 3600);
+    $howManyTimeToEndStamp = $howManyTimeToEndStamp % 3600;
+    $howManyTimeToEnd['minutes'] = floor($howManyTimeToEndStamp / 60);
+
+    return ($howManyTimeToEnd);
 }
 
 $categories = [
