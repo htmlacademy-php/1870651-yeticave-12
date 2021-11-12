@@ -34,9 +34,23 @@
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost"><?php print(format_price(htmlspecialchars($lot['price']))); ?> </span>
                         </div>
-                        <div class="lot__timer timer">
-                            12:23
-                        </div>
+                        <?php  //Вызываем функцию подсчёта остатка времни в каждой итерации цикла
+                        $timeToEnd = EndOfTime($lot['dateOfEnd']);
+                        $hours = $timeToEnd['hours'];
+                        $minutes = $timeToEnd['minutes'];
+                        if ($hours >= 1){
+                            echo '<div class="lot__timer timer">';
+                            echo $hours,':',$minutes;
+                            echo '</div';
+                        }
+                        if ($hours < 1 && $hours > 0) {
+                            echo '<div class="lot__timer timer">';
+                            echo '<div class="timer--finishing">';
+                            echo $hours,':',$minutes;
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                        ?>
                     </div>
                 </div>
             </li>

@@ -67,7 +67,7 @@ $lots = [
     'category' => 'Маска',
     'price' => 5400,
     'url_picture' => 'img/lot-6.jpg',
-    'dateOfEnd' => '2021-12-25'
+    'dateOfEnd' => '2021-11-12'
     ],
 ];
 
