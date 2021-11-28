@@ -64,7 +64,7 @@ $lots = [
     ],
     [
     'name' => 'Маска Oakley Canopy',
-    'category' => 'Маска',
+    'category' => 'Разное',
     'price' => 5400,
     'url_picture' => 'img/lot-6.jpg',
     'dateOfEnd' => '2021-11-12'
