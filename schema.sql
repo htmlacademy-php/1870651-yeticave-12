@@ -2,7 +2,7 @@ CREATE DATABASE YetiCave;
 
 CREATE TABLE category
 (
-  id INT NOT NULL UNIQUE ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   name VARCHAR (20) NOT NULL ,
   code VARCHAR (20) NOT NULL ,
   PRIMARY KEY (id) ,
@@ -12,8 +12,8 @@ CREATE TABLE category
 
 CREATE TABLE lot
 (
-  id INT NOT NULL UNIQUE ,
-  create_date DATETIME NOT NULL ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
+  create_date DATETIME NOT NULL DEFAULT NOW() ,
   name VARCHAR (100) NOT NULL ,
   description VARCHAR (200) NOT NULL ,
   image VARCHAR (200) NOT NULL ,
@@ -21,7 +21,7 @@ CREATE TABLE lot
   end_date DATE NOT NULL ,
   step FLOAT ,
   author INT NOT NULL ,
-  winner INT NOT NULL ,
+  winner INT  ,
   category_name INT NOT NULL ,
   PRIMARY KEY (id) ,
   CONSTRAINT unique_image UNIQUE( image ),
@@ -31,8 +31,8 @@ CREATE TABLE lot
 
 CREATE TABLE bet
 (
-  id INT NOT NULL UNIQUE ,
-  create_date DATETIME ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
+  create_date DATETIME DEFAULT NOW() ,
   sum FLOAT ,
   user INT NOT NULL ,
   lot INT NOT NULL ,
@@ -41,11 +41,11 @@ CREATE TABLE bet
 
 CREATE TABLE users
 (
-  id INT NOT NULL UNIQUE ,
-  reg_date DATETIME NOT NULL ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
+  reg_date DATETIME NOT NULL DEFAULT NOW() ,
   email VARCHAR (50) NOT NULL ,
   login VARCHAR (20) NOT NULL ,
-  pass VARCHAR (30) NOT NULL,
+  pass CHAR (32) NOT NULL,
   contacts VARCHAR (15) NOT NULL ,
   created_lots INT NOT NULL ,
   made_bets INT NOT NULL ,
