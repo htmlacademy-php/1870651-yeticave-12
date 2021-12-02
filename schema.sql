@@ -1,6 +1,6 @@
 CREATE DATABASE YetiCave;
 USE YetiCave;
-CREATE TABLE category
+CREATE TABLE categories
 (
   id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   name VARCHAR (20) NOT NULL ,
@@ -10,26 +10,25 @@ CREATE TABLE category
   CONSTRAINT unique_code UNIQUE( code )
 );
 
-CREATE TABLE lot
+CREATE TABLE lots
 (
   id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   create_date DATETIME NOT NULL DEFAULT NOW() ,
   name VARCHAR (100) NOT NULL ,
   description VARCHAR (200) NOT NULL ,
-  image VARCHAR (200) NOT NULL ,
+  url_picture VARCHAR (200) NOT NULL ,
   start_price INT NOT NULL ,
   end_date DATE NOT NULL ,
-  step FLOAT ,
+  step FLOAT NOT NULL ,
   author INT NOT NULL ,
   winner INT  ,
-  category_name INT NOT NULL ,
+  category_id INT NOT NULL ,
   PRIMARY KEY (id) ,
-  CONSTRAINT unique_image UNIQUE( image ),
-  CONSTRAINT unique_winner UNIQUE( winner ),
-  CONSTRAINT unique_author UNIQUE( author )
+  CONSTRAINT unique_image UNIQUE( url_picture )
+
 );
 
-CREATE TABLE bet
+CREATE TABLE bets
 (
   id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   create_date DATETIME DEFAULT NOW() ,
