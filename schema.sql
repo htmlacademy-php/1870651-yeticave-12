@@ -19,21 +19,19 @@ CREATE TABLE lot
   image VARCHAR (200) NOT NULL ,
   start_price INT NOT NULL ,
   end_date DATE NOT NULL ,
-  step FLOAT ,
+  step FLOAT NOT NULL ,
   author INT NOT NULL ,
   winner INT  ,
   category_name INT NOT NULL ,
   PRIMARY KEY (id) ,
-  CONSTRAINT unique_image UNIQUE( image ),
-  CONSTRAINT unique_winner UNIQUE( winner ),
-  CONSTRAINT unique_author UNIQUE( author )
+  CONSTRAINT unique_image UNIQUE( image )
 );
 
 CREATE TABLE bet
 (
   id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   create_date DATETIME DEFAULT NOW() ,
-  sum FLOAT ,
+  sum FLOAT NOT NULL ,
   user INT NOT NULL ,
   lot INT NOT NULL ,
   PRIMARY KEY (id)
@@ -47,8 +45,8 @@ CREATE TABLE users
   login VARCHAR (20) NOT NULL ,
   pass CHAR (32) NOT NULL,
   contacts VARCHAR (15) NOT NULL ,
-  created_lots INT NOT NULL ,
-  made_bets INT NOT NULL ,
+  created_lots INT  ,
+  made_bets INT  ,
   PRIMARY KEY (id) ,
   CONSTRAINT unique_email UNIQUE( email ),
   CONSTRAINT unique_login UNIQUE( login )
