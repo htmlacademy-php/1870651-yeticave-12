@@ -16,7 +16,7 @@ CREATE TABLE lot
   create_date DATETIME NOT NULL DEFAULT NOW() ,
   name VARCHAR (100) NOT NULL ,
   description VARCHAR (200) NOT NULL ,
-  image VARCHAR (200) NOT NULL ,
+  url_picture VARCHAR (200) NOT NULL ,
   start_price INT NOT NULL ,
   end_date DATE NOT NULL ,
   step FLOAT NOT NULL ,
@@ -24,7 +24,7 @@ CREATE TABLE lot
   winner INT  ,
   category_id INT NOT NULL ,
   PRIMARY KEY (id) ,
-  CONSTRAINT unique_image UNIQUE( image )
+  CONSTRAINT unique_url_picture UNIQUE( url_picture )
 );
 
 CREATE TABLE bet
