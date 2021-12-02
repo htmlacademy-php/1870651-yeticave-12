@@ -1,9 +1,8 @@
 CREATE DATABASE YetiCave;
 USE YetiCave;
-
-CREATE TABLE categories
+CREATE TABLE category
 (
-  id INT NOT NULL AUTO_INCREMENT ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   name VARCHAR (20) NOT NULL ,
   code VARCHAR (20) NOT NULL ,
   PRIMARY KEY (id) ,
@@ -11,28 +10,28 @@ CREATE TABLE categories
   CONSTRAINT unique_code UNIQUE( code )
 );
 
-CREATE TABLE lots
+CREATE TABLE lot
 (
-  id INT NOT NULL AUTO_INCREMENT ,
-  create_date DATETIME NOT NULL  DEFAULT NOW() ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
+  create_date DATETIME NOT NULL DEFAULT NOW() ,
   name VARCHAR (100) NOT NULL ,
   description VARCHAR (200) NOT NULL ,
-  url_pictures VARCHAR (200) NOT NULL ,
-  price INT NOT NULL ,
-  dateOfEnd DATE NOT NULL ,
+  image VARCHAR (200) NOT NULL ,
+  start_price INT NOT NULL ,
+  end_date DATE NOT NULL ,
   step FLOAT ,
   author INT NOT NULL ,
   winner INT  ,
-  category INT NOT NULL ,
+  category_name INT NOT NULL ,
   PRIMARY KEY (id) ,
   CONSTRAINT unique_image UNIQUE( image ),
   CONSTRAINT unique_winner UNIQUE( winner ),
   CONSTRAINT unique_author UNIQUE( author )
 );
 
-CREATE TABLE bets
+CREATE TABLE bet
 (
-  id INT NOT NULL AUTO_INCREMENT ,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
   create_date DATETIME DEFAULT NOW() ,
   sum FLOAT ,
   user INT NOT NULL ,
@@ -42,11 +41,11 @@ CREATE TABLE bets
 
 CREATE TABLE users
 (
-  id INT NOT NULL AUTO_INCREMENT ,
-  reg_date DATETIME NOT NULL DEFAULT NOW,
+  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
+  reg_date DATETIME NOT NULL DEFAULT NOW() ,
   email VARCHAR (50) NOT NULL ,
   login VARCHAR (20) NOT NULL ,
-  password CHAR (32) NOT NULL,
+  pass CHAR (32) NOT NULL,
   contacts VARCHAR (15) NOT NULL ,
   created_lots INT NOT NULL ,
   made_bets INT NOT NULL ,
