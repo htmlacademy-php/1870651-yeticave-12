@@ -6,7 +6,7 @@ CREATE TABLE category
   name VARCHAR (20) NOT NULL ,
   code VARCHAR (20) NOT NULL ,
   PRIMARY KEY (id) ,
-  CONSTRAINT unique_name UNIQUE( name),
+  CONSTRAINT unique_name UNIQUE( name ),
   CONSTRAINT unique_code UNIQUE( code )
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE lot
   step FLOAT NOT NULL ,
   author INT NOT NULL ,
   winner INT  ,
-  category_name INT NOT NULL ,
+  category_id INT NOT NULL ,
   PRIMARY KEY (id) ,
   CONSTRAINT unique_image UNIQUE( image )
 );
@@ -45,8 +45,6 @@ CREATE TABLE users
   login VARCHAR (20) NOT NULL ,
   pass CHAR (32) NOT NULL,
   contacts VARCHAR (15) NOT NULL ,
-  created_lots INT  ,
-  made_bets INT  ,
   PRIMARY KEY (id) ,
   CONSTRAINT unique_email UNIQUE( email ),
   CONSTRAINT unique_login UNIQUE( login )
