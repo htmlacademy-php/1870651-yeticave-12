@@ -1,89 +1,77 @@
-CREATE DATABASE YetiCave;
-USE YetiCave;
-CREATE TABLE categories
+CREATE DATABASE `yeticave`;
+USE `yetiyave`;
+CREATE TABLE `categories`
 (
-  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
-  name VARCHAR (20) NOT NULL ,
-  code VARCHAR (20) NOT NULL ,
-  PRIMARY KEY (id) ,
-  CONSTRAINT unique_name UNIQUE( name),
-  CONSTRAINT unique_code UNIQUE( code )
+  `idcategories` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) NOT NULL,
+  `code` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`idcategories`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE
 );
 
-CREATE TABLE lots
+CREATE TABLE `lots`
 (
-  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
-  create_date DATETIME NOT NULL DEFAULT NOW() ,
-  name VARCHAR (100) NOT NULL ,
-  description VARCHAR (200) NOT NULL ,
-  url_picture VARCHAR (200) NOT NULL ,
-  start_price INT NOT NULL ,
-  end_date DATE NOT NULL ,
-  step FLOAT NOT NULL ,
-  author INT NOT NULL ,
-  winner INT  ,
-  category_id INT NOT NULL ,
-  PRIMARY KEY (id) ,
-  CONSTRAINT unique_image UNIQUE( url_picture )
-
+  `idlots` INT NOT NULL AUTO_INCREMENT,
+  `create_date` DATETIME NOT NULL DEFAULT NOW,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(200) NOT NULL,
+  `url_picture` VARCHAR(200) NOT NULL,
+  `price` FLOAT NOT NULL,
+  `end_date` DATETIME NOT NULL,
+  `step` FLOAT NOT NULL,
+  `author` INT NOT NULL,
+  `winner` INT NULL,
+  `category_id` INT NOT NULL,
+  PRIMARY KEY (`idlots`),
+  UNIQUE INDEX `url_picture_UNIQUE` (`url_picture` ASC) VISIBLE,
+  INDEX `fk_lots_categories_idx` (`category_id` ASC) VISIBLE,
+  INDEX `fk_lots_users1_idx` (`author` ASC, `winner` ASC) VISIBLE,
+  CONSTRAINT `fk_lots_categories`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `mydb`.`categories` (`idcategories`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lots_users1`
+    FOREIGN KEY (`author` , `winner`)
+    REFERENCES `mydb`.`users` (`idusers` , `idusers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
 
-CREATE TABLE bets
+CREATE TABLE `bets`
 (
-  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
-  create_date DATETIME DEFAULT NOW() ,
-  sum FLOAT ,
-  user INT NOT NULL ,
-  lot INT NOT NULL ,
-  PRIMARY KEY (id)
+`idbets` INT NOT NULL AUTO_INCREMENT,
+  `create_date` DATETIME NOT NULL DEFAULT NOW,
+  `sum` FLOAT NOT NULL,
+  `user` INT NOT NULL,
+  `lot` INT NOT NULL,
+  PRIMARY KEY (`idbets`),
+  INDEX `fk_bets_lots1_idx` (`lot` ASC) VISIBLE,
+  INDEX `fk_bets_users1_idx` (`user` ASC) VISIBLE,
+  CONSTRAINT `fk_bets_lots1`
+    FOREIGN KEY (`lot`)
+    REFERENCES `mydb`.`lots` (`idlots`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bets_users1`
+    FOREIGN KEY (`user`)
+    REFERENCES `mydb`.`users` (`idusers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
 
-CREATE TABLE users
+CREATE TABLE `users`
 (
-  id INT NOT NULL UNIQUE AUTO_INCREMENT ,
-  reg_date DATETIME NOT NULL DEFAULT NOW() ,
-  email VARCHAR (50) NOT NULL ,
-  login VARCHAR (20) NOT NULL ,
-  pass CHAR (32) NOT NULL,
-  contacts VARCHAR (15) NOT NULL ,
-  created_lots INT NOT NULL ,
-  made_bets INT NOT NULL ,
-  PRIMARY KEY (id) ,
-  CONSTRAINT unique_email UNIQUE( email ),
-  CONSTRAINT unique_login UNIQUE( login )
+  `idusers` INT NOT NULL AUTO_INCREMENT,
+  `reg_date` DATETIME NOT NULL DEFAULT NOW,
+  `email` VARCHAR(50) NOT NULL,
+  `login` VARCHAR(20) NOT NULL,
+  `password` CHAR(32) NOT NULL,
+  `contacts` VARCHAR(15) NOT NULL,
+  PRIMARY KEY (`idusers`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE,
+  UNIQUE INDEX `contacts_UNIQUE` (`contacts` ASC) VISIBLE)
 );
-
-ALTER TABLE lots
-	ADD CONSTRAINT lnk_category_lot FOREIGN KEY ( category_id )
-	REFERENCES category( id )
-	ON DELETE Cascade
-	ON UPDATE Cascade;
-  ADD CONSTRAINT `lnk_users_lot` FOREIGN KEY ( `author`, `winner` )
-	REFERENCES `users`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Cascade;
-
-ALTER TABLE `users`
-	ADD CONSTRAINT `lnk_bet_users` FOREIGN KEY ( `bet_id` )
-	REFERENCES `bets`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Cascade;
-
-ALTER TABLE `bets`
-	ADD CONSTRAINT `lnk_lot_bet` FOREIGN KEY ( `lot_id` )
-	REFERENCES `lots`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Cascade;
-
-ALTER TABLE `users`
-	ADD CONSTRAINT `lnk_lot_users` FOREIGN KEY ( `created_lots` )
-	REFERENCES `lots`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Cascade;
-
-ALTER TABLE `users`
-	ADD CONSTRAINT `lnk_bet_users_2` FOREIGN KEY ( `made_bets` )
-	REFERENCES `bets`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Cascade;
 
