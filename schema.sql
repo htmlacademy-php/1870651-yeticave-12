@@ -29,12 +29,12 @@ CREATE TABLE `lots`
   INDEX `fk_lots_users1_idx` (`author` ASC, `winner` ASC) VISIBLE,
   CONSTRAINT `fk_lots_categories`
     FOREIGN KEY (`category_id`)
-    REFERENCES `mydb`.`categories` (`idcategories`)
+    REFERENCES `yeticave`.`categories` (`idcategories`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lots_users1`
     FOREIGN KEY (`author` , `winner`)
-    REFERENCES `mydb`.`users` (`idusers` , `idusers`)
+    REFERENCES `yeticave`.`users` (`idusers` , `idusers`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
@@ -51,12 +51,12 @@ CREATE TABLE `bets`
   INDEX `fk_bets_users1_idx` (`user` ASC) VISIBLE,
   CONSTRAINT `fk_bets_lots1`
     FOREIGN KEY (`lot`)
-    REFERENCES `mydb`.`lots` (`idlots`)
+    REFERENCES `yeticave`.`lots` (`idlots`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_bets_users1`
     FOREIGN KEY (`user`)
-    REFERENCES `mydb`.`users` (`idusers`)
+    REFERENCES `yeticave`.`users` (`idusers`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
