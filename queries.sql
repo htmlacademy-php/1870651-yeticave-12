@@ -1,33 +1,50 @@
 //Заполнение таблицы categories
-INSERT INTO categories (name, code) VALUES ('Доски и лыжи', 'boards');
-INSERT INTO categories (name, code) VALUES ('Крепления', 'attachment');
-INSERT INTO categories (name, code) VALUES ('Ботинки', 'boots');
-INSERT INTO categories (name, code) VALUES ('Одежда', 'clothing');
-INSERT INTO categories (name, code) VALUES ('Инструменты', 'tools');
-INSERT INTO categories (name, code) VALUES ('Разное', 'other');
+INSERT INTO categories
+  (name, code)
+VALUES
+  ('Доски и лыжи', 'boards'),
+  ('Крепления', 'attachment'),
+  ('Ботинки', 'boots'),
+  ('Одежда', 'clothing'),
+  ('Инструменты', 'tools'),
+  ('Разное', 'other');
 //Заполнение таблицы lots
-INSERT INTO lots (name, category, price, url_picture, dateOfEnd) VALUES ('2014 Rossignol District Snowboard', 'Доски и лыжи', 10999, 'img/lot-1.jpg', '2021-11-18');
-INSERT INTO lots (name, category, price, url_picture, dateOfEnd) VALUES ('DC Ply Mens 2016/2017 Snowboard', 'Доски и лыжи', 159999, 'img/lot-2.jpg', '2021-11-28');
-INSERT INTO lots (name, category, price, url_picture, dateOfEnd) VALUES ('Крепления Union Contact Pro 2015 года размер L/XL', 'Крепления', 8000, 'img/lot-3.jpg', '2021-12-11');
-INSERT INTO lots (name, category, price, url_picture, dateOfEnd) VALUES ('Ботинки для сноуборда DC Mutiny Charocal', 'Ботинки', 10999, 'img/lot-4.jpg', '2021-12-16');
-INSERT INTO lots (name, category, price, url_picture, dateOfEnd) VALUES ('Куртка для сноуборда DC Mutiny Charocal', 'Одежда', 7500, 'img/lot-5.jpg', '2021-12-01');
-INSERT INTO lots (name, category, price, url_picture, dateOfEnd) VALUES ('Маска Oakley Canopy', 'Разное', 5400, 'img/lot-6.jpg', '2021-11-12');
+INSERT INTO lots (name, category_id, price, step, url_picture, end_date, author, description)
+  VALUES ('2014 Rossignol District Snowboard', 1, 10999, 0.5, 'img/lot-1.jpg', '2021-11-18', 1, 'Самый лучший сноуборд');
+INSERT INTO lots (name, category_id, price, step, url_picture, end_date, author, description)
+  VALUES ('DC Ply Mens 2016/2017 Snowboard', 1, 159999, 0.5, 'img/lot-2.jpg', '2021-11-28', 2, 'Ещё лучше сноуборд');
+INSERT INTO lots (name, category_id, price, step, url_picture, end_date, author, description)
+  VALUES ('Крепления Union Contact Pro 2015 года размер L/XL', 2, 8000, 0.5, 'img/lot-3.jpg', '2021-12-11', 1, 'Надёжнее креплений не найти');
+INSERT INTO lots (name, category_id, price, step, url_picture, end_date, author, description)
+  VALUES ('Ботинки для сноуборда DC Mutiny Charocal', 3, 10999, 0.5, 'img/lot-4.jpg', '2021-12-16', 3, 'Удобнее ботинок не бывает');
+INSERT INTO lots (name, category_id, price, step, url_picture, end_date, author, description)
+  VALUES ('Куртка для сноуборда DC Mutiny Charocal', 4, 7500, 0.5, 'img/lot-5.jpg', '2021-12-01', 3, 'Самая тёплая куртка');
+INSERT INTO lots (name, category_id, price, step, url_picture, end_date, author, description)
+  VALUES ('Маска Oakley Canopy', 6, 5400, 0.5, 'img/lot-6.jpg', '2021-11-12', 1, 'Ваше лицо скажет Вам спасибо');
+
 //Заполнение таблицы users
 INSERT INTO users (login, password, email, contacts) VALUES ('first', 'first', 'first@mail.ru', '32131312');
 INSERT INTO users (login, password, email, contacts) VALUES ('second', 'second', 'second@mail.ru', '32131322');
 INSERT INTO users (login, password, email, contacts) VALUES ('third', 'third', 'third@mail.ru', '32131332');
+
 //Заполнение таблицы bets
-INSERT INTO bets (user, lot, sum ) VALUES (1, 2, 100);
-INSERT INTO bets (user, lot, sum ) VALUES (2, 2, 100);
-INSERT INTO bets (user, lot, sum ) VALUES (1, 1, 100);
+INSERT INTO bets (user_id, lot_id, sum ) VALUES (1, 2, 100);
+INSERT INTO bets (user_id, lot_id, sum ) VALUES (2, 2, 100);
+INSERT INTO bets (user_id, lot_id, sum ) VALUES (1, 1, 100);
 
 //получить все категории
 SELECT * FROM categories;
-//получить открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории;
-SELECT name, price, url_pictures, catogory  FROM lots WHERE dateOfEnd > CURRENT_DATE;
-//показать лот по его ID. Получите также название категории, к которой принадлежит лот;
-SELECT * FROM lots  RIGHT JOIN categories ON lots.category = categories.id;
-//обновить название лота по его идентификатору;
-SELECT id, name FROM lots;
+
+//получить открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории
+SELECT name, price, url_pictures, category_id, sum FROM lots WHERE end_date > CURRENT_DATE
+JOIN categories ON category_id = categories.id
+JOIN bets ON sum = bets.sum;
+
+//показать лот по его ID. Получите также название категории, к которой принадлежит лот
+SELECT * FROM lots  JOIN categories ON lots.category_id = categories.id;
+
+//обновить название лота по его идентификатору; //
+UPDATE lots SET name = 'Крепления Union Contact Pro 2016 года размер XXL' WHERE id = 3;
+
 //получить список ставок для лота по его идентификатору с сортировкой по дате.
 SELECT * FROM bets WHERE lot = 1 ORDER BY create_date;
