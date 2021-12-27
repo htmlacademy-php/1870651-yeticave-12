@@ -1,5 +1,5 @@
 CREATE DATABASE `yeticave`;
-USE `yetiyave`;
+USE `yetiсave`;
 CREATE TABLE `categories`
 (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -20,8 +20,8 @@ CREATE TABLE `lots`
   `price` FLOAT NOT NULL,
   `end_date` DATETIME NOT NULL,
   `step` FLOAT NOT NULL,
-  `author` INT NOT NULL,
-  `winner` INT NULL,
+  `author_id` INT NOT NULL,
+  `winner_id` INT NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `url_picture_UNIQUE` (`url_picture` ASC) VISIBLE,

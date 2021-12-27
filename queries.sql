@@ -36,14 +36,25 @@ INSERT INTO bets (user_id, lot_id, sum ) VALUES (1, 1, 100);
 SELECT * FROM categories;
 
 //получить открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории
-SELECT name, price, url_pictures, category_id, sum FROM lots WHERE end_date > CURRENT_DATE
-JOIN categories ON category_id = categories.id
-JOIN bets ON sum = bets.sum;
+SELECT
+  l.name,
+  l.price,
+  l.url_pictures,
+  c.name,
+  MAX(b.sum)
+FROM lots l
+JOIN categories c ON c.id = category_id
+LEFT JOIN bets b ON b.lot_id = l.id
+WHERE l.end_date > NOW()
+GROUP BY l.id
+;
 
 //показать лот по его ID. Получите также название категории, к которой принадлежит лот
-SELECT * FROM lots  JOIN categories ON lots.category_id = categories.id;
+//Переписать запрос по видео
+SELECT lots.*, categories.name FROM lots  JOIN categories ON lots.category_id = categories.id
+WHERE lots.id = 2;
 
-//обновить название лота по его идентификатору; //
+//обновить название лота по его идентификатору;
 UPDATE lots SET name = 'Крепления Union Contact Pro 2016 года размер XXL' WHERE id = 3;
 
 //получить список ставок для лота по его идентификатору с сортировкой по дате.
