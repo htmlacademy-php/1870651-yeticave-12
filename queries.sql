@@ -43,16 +43,17 @@ SELECT
   c.name,
   MAX(b.sum)
 FROM lots l
-JOIN categories c ON c.id = category_id
+JOIN categories c ON c.id = l.category_id
 LEFT JOIN bets b ON b.lot_id = l.id
 WHERE l.end_date > NOW()
 GROUP BY l.id
 ;
 
 //показать лот по его ID. Получите также название категории, к которой принадлежит лот
-//Переписать запрос по видео
-SELECT lots.*, categories.name FROM lots  JOIN categories ON lots.category_id = categories.id
-WHERE lots.id = 2;
+SELECT lots.*, categories.name FROM lots
+JOIN categories ON lots.category_id = categories.id
+WHERE lots.id = 2
+;
 
 //обновить название лота по его идентификатору;
 UPDATE lots SET name = 'Крепления Union Contact Pro 2016 года размер XXL' WHERE id = 3;
