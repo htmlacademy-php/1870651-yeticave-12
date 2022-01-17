@@ -74,4 +74,3 @@ CREATE TABLE `users`
   UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE,
   UNIQUE INDEX `contacts_UNIQUE` (`contacts` ASC) VISIBLE)
 );
-
