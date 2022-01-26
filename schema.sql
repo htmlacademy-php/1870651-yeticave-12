@@ -72,5 +72,5 @@ CREATE TABLE `users`
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE,
-  UNIQUE INDEX `contacts_UNIQUE` (`contacts` ASC) VISIBLE)
+  UNIQUE INDEX `contacts_UNIQUE` (`contacts` ASC)  VISIBLE)
 );
